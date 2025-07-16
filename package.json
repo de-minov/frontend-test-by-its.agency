@@ -1,4 +1,17 @@
 {
+  "description": "Frontend test task for its.agency",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/de-minov/frontend-test-by-its.agency.git"
+  },
+  "author": "de.minov",
+  "license": "MIT",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build",
+    "predeploy": "gulp build",
+    "deploy": "gh-pages -d htdocs"
+  },
   "type": "module",
   "devDependencies": {
     "@babel/core": "^7.28.0",
