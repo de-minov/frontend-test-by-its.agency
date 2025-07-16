@@ -1,0 +1,20 @@
+include ../InputScore/index
+
+template#basket-card--template
+    .basket-card
+        .basket-card__image: img(src="/files/images/no-photo.jpg" alt="no-photo")/
+        .basket-card__info
+            .basket-card__info-title Название продукта
+            .basket-card__info-price 0000 ₽
+        .basket-card__actions
+            +inputScore(
+                value="1"
+                name="basket-product"
+                min="0"
+                isClear
+            )
+
+            .basket-card__actions-button(role="button" area-label="Заменить товар" data-action="replace")
+                +icon('icon:repeat', 24, 24)
+            .basket-card__actions-button(role="button" area-label="Удалить товар" data-action="remove")
+                +icon('icon:delete', 24, 24)

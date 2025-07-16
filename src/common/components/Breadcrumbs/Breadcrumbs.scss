@@ -1,0 +1,26 @@
+@use '../../../assets/scss/vars.scss' as *;
+@use '../../../assets/scss/mixins/media-mixins.scss' as *;
+@use '../../../assets/scss/mixins/media-breakpoints.scss' as *;
+
+.breadcrumbs {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    opacity: .3;
+    cursor: default;
+    user-select: none;
+
+    @include media-1920 {
+        font-size: apxm(10px);
+    }
+
+    @include media-768 {
+        font-size: apxm(10px);
+    }
+}

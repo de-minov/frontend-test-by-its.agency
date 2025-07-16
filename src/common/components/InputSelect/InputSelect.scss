@@ -1,0 +1,73 @@
+@use '../../../assets/scss/vars.scss' as *;
+@use '../../../assets/scss/mixins/media-mixins.scss' as *;
+@use '../../../assets/scss/mixins/media-breakpoints.scss' as *;
+
+.input-select {
+    --input-select-drop-icon-size: .714em;
+    --input-select-item-padding-vertical: 1.214em;
+    --input-select-item-padding-horizontal: 1.714em;
+
+    display: block;
+    position: relative;
+
+    &__label {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: .33em;
+        cursor: pointer;
+        user-select: none;
+
+        > span {
+            font-weight: 500;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        > svg {
+            flex-shrink: 0;
+            display: block;
+            width: var(--input-select-drop-icon-size);
+            height: var(--input-select-drop-icon-size);
+            transform: translateY(-12.5%);
+        }
+    }
+
+    &__drop {
+        display: block;
+        min-width: 280px;
+        width: auto;
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s ease;
+
+        &--dropped {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        &-item {
+            display: block;
+            padding: var(--input-select-item-padding-vertical) var(--input-select-item-padding-horizontal);
+            cursor: pointer;
+            user-select: none;
+            transition: background-color .2s ease;
+
+            &--selected {
+                background-color: $accentColor;
+                cursor: default;
+            }
+
+            &:not(&--selected) {
+                @include media-hover {
+                    background-color: #f2f2f2;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+@use '../../../assets/scss/vars.scss' as *;
+@use '../../../assets/scss/mixins/media-mixins.scss' as *;
+@use '../../../assets/scss/mixins/media-breakpoints.scss' as *;
+
+.button {
+    --button-height: 56px;
+    --button-background--default: #{$accentColor};
+    --button-background--hover: #{rgba($accentColor, .7)};
+    --button-background--disabled: #f2f2f2;
+    --button-color--default: #{$blackText};
+    --button-color--hover: var(--button-color--default);
+    --button-color--disabled: #{rgba($blackText, .65)};
+    --button-border-radius: 4px;
+    --button-padding: 57px;
+    --button-font-size: 12px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: var(--button-height);
+    border-radius: var(--button-border-radius);
+    background-color: var(--button-background, var(--button-background--default));
+    font: inherit;
+    font-weight: 500;
+    font-size: var(--button-font-size);
+    line-height: 1;
+    letter-spacing: .06em;
+    color: var(--button-color, var(--button-color--default));
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0 var(--button-padding);
+    transition: {
+        property: background-color, color;
+        timing-function: ease;
+        duration: .2s;
+    };
+    user-select: none;
+    cursor: pointer;
+
+    @include media-1920 {
+        --button-height: #{apxm(56px)};
+        --button-border-radius: #{apxm(4px)};
+        --button-padding: #{apxm(57px)};
+        --button-font-size: #{apxm(12px)};
+    }
+
+    @include media-768 {
+        --button-height: #{apxm(50px)};
+        --button-border-radius: #{apxm(4px)};
+        --button-padding: #{apxm(20px)};
+        --button-font-size: #{apxm(12px)};
+    }
+
+    @include media-hover {
+        --button-background: var(--button-background--hover);
+        --button-color: var(--button-color--hover);
+    }
+
+    &--disabled,
+    &:disabled {
+        --button-background: var(--button-background--disabled) !important;
+        --button-color: var(--button-color--disabled) !important;
+        cursor: default;
+    }
+}

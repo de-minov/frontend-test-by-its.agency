@@ -1,0 +1,23 @@
+@use 'vars.scss' as *;
+@use 'mixins/media-mixins.scss' as *;
+@use 'mixins/media-breakpoints.scss' as *;
+
+:root {
+    --font-family: #{$Inter};
+
+    --edge-indent: 64px;
+
+    --header-height: 104px;
+
+    @include media-1920 {
+        --edge-indent: #{apxm(64px)};
+
+        --header-height: #{apxm(104px)};
+    }
+
+    @include media-768 {
+        --edge-indent: #{apxm(24px)};
+        
+        --header-height: #{apxm(64px)};
+    }
+}

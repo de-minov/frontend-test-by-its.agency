@@ -1,0 +1,94 @@
+@use '../../../assets/scss/vars.scss' as *;
+@use '../../../assets/scss/mixins/media-mixins.scss' as *;
+@use '../../../assets/scss/mixins/media-breakpoints.scss' as *;
+
+.input-score {
+    --input-score-gap: 17px;
+    --input-score-button-width: 40px;
+    --input-score-button-height: 24px;
+    --input-score-button-border-radius: 4px;
+    --input-score-button-icon-size: 16px;
+    --input-score-font-size: 16px;
+    --input-score-button-background--default: #f2f2f2;
+    --input-score-button-background--hover: #{$accentColor};
+    --input-score-button-background--disabled: #{rgba(#f2f2f2, .65)};
+    --input-score-color--default: #{$blackText};
+    --input-score-color--hover: #{$blackText};
+    --input-score-color--disabled: #{rgba($blackText, .65)};
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--input-score-gap);
+    font-weight: 400;
+    font-size: var(--input-score-font-size);
+    color: var(--input-score-color, var(--input-score-color--default));
+    line-height: 1;
+    user-select: none;
+    transition: color .2s ease;
+
+    @include media-1920 {
+        --input-score-gap: #{apxm(17px)};
+        --input-score-button-width: #{apxm(40px)};
+        --input-score-button-height: #{apxm(24px)};
+        --input-score-button-border-radius: #{apxm(4px)};
+        --input-score-button-icon-size: #{apxm(16px)};
+        --input-score-font-size: #{apxm(16px)};
+    }
+
+    @include media-768 {
+        --input-score-gap: #{apxm(17px)};
+        --input-score-button-width: #{apxm(40px)};
+        --input-score-button-height: #{apxm(24px)};
+        --input-score-button-border-radius: #{apxm(4px)};
+        --input-score-button-icon-size: #{apxm(16px)};
+        --input-score-font-size: #{apxm(16px)};
+    }
+
+    &__input-hidden {
+        display: none !important;
+    }
+
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: var(--input-score-button-width);
+        height: var(--input-score-button-height);
+        background-color: var(--input-score-button-background, var(--input-score-button-background--default));
+        border-radius: var(--input-score-button-border-radius);
+        cursor: pointer;
+        transition: {
+            property: background-color, color;
+            duration: .2s;
+            timing-function: ease;
+        };
+
+        svg {
+            display: block;
+            width: var(--input-score-button-icon-size);
+            height: var(--input-score-button-icon-size);
+        }
+
+        @include media-hover {
+            --input-score-button-background: var(--input-score-button-background--hover);
+            color: var(--input-score-color--hover);
+        }
+    }
+
+    &:has(input:disabled) {
+        --input-score-color: var(--input-score-color--disabled) !important;
+        --input-score-button-background: var(--input-score-button-background--disabled) !important;
+    }
+
+    &:has(input:disabled) &__button {
+        pointer-events: none;
+    }
+
+    &--hidden-controls & {
+        &__button--minus,
+        &__value {
+            display: none;
+        }
+    }
+}

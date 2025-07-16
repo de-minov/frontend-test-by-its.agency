@@ -1,0 +1,19 @@
+include ../Button/index
+
+.basket
+    include ../BasketCard/index
+    
+    .basket__head
+        .basket__head-title Корзина
+        .basket__head-close.basket-action--closed(role="button" area-label="Закрыть корзину"): +icon('icon:close', 48, 48)
+    .basket__content
+        .basket-product
+            .basket-product__head
+                .basket-product__head-value 0
+                .basket-product__head-clear(role="button" area-label="Очистить список") Очистить список
+            .basket-product__list
+    .basket__footer
+        .basket__price
+            .basket__price-title Итого
+            .basket__price-value 00 000₽
+        +button(label="Оформить заказ" disabled).basket__submit

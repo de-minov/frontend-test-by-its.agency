@@ -1,0 +1,15 @@
+extends ../../common/layouts/html
+
+block append STYLES
+    link(rel="stylesheet" href="/css/page-index.min.css")/
+
+block BODY 
+    include ../../common/components/InputCheckbox/index
+    include ../../common/components/InputSelect/index
+
+    //- -----
+    include ../../common/components/Header/index
+    main
+        include ../../common/components/Banner/index
+        include ../../common/components/ProductsContent/index
+    include ../../common/components/Footer/index

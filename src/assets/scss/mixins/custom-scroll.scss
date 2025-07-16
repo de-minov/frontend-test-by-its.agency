@@ -1,0 +1,28 @@
+@use '../vars' as *;
+
+/// SCROLL-CUSTOM
+/// @param {Color} $thumb-color [#DEDEDE] - цвет бегунка
+/// @param {Color} $track-color [transparent] - цвет фона скролла
+/// @example
+///     @include scroll-custom();
+@mixin scroll-custom($thumb-color: $theme-gray, $track-color: $theme-background) {
+    & {
+        scrollbar-color: $thumb-color $track-color;
+        scrollbar-width: thin;
+
+        &::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+
+            &-track {
+                background-color: $track-color;
+                border-radius: 7px;
+            }
+
+            &-thumb {
+                background-color: $thumb-color;
+                border-radius: 4px;
+            }    
+        }
+    }
+}

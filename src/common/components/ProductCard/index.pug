@@ -1,0 +1,15 @@
+include ../InputScore/index
+
+template#product-card--template
+    .product-card
+        .product-card__image: img(src="/files/images/no-photo.jpg" alt="no-photo")/
+        .product-card__title Название краски
+        .product-card__footer
+            .product-card__footer-price 00000 ₽
+            .product-card__footer-action
+                +inputScore(
+                    value="0"
+                    name="product-item"
+                    min="0"
+                    isStart
+                )

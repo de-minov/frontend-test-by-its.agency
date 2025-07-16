@@ -1,0 +1,69 @@
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:list';
+@use '../vars' as *;
+@use 'utils' as *;
+
+/// ADAPTIVE PX
+/// @param {px} $px - количество пикселей на макете
+/// @param {px} $break - ширина макета
+/// @return {rem} - Возвращает значение ($px / $break) в rem, что является пропорциональной разницей между размером на макете с шириной макета.
+/// @example 
+///     font-size: apx(100px, 1440px); // font-size: 0.6944444444rem;
+@function apx($px, $break) {
+    @return r2f(math.div($px, $break) * 100vw);
+}
+
+/// INCREASE TO SCREEN
+/// @param {px} $px - количество пикселей на макете с максимальным размером
+/// @param {px} $lw = 1440px - количество пикселей на макете с максимальным размером
+/// @return {px} - Возвращает px, который высчитывать с разницей между максимальной шириной сайта и максимальным размером макета
+/// @example
+///     $max-desktop-width = 2560px;
+///     $lw = 1440px;
+///     font-size: ims(100px); // font-size: 177.7777777778px;
+@function ims($px, $lw: 1920px) {
+    @return math.ceil($px * math.div($max-desktop-width, $lw));
+}
+
+/// STRIP UNIT
+/// @param {unit} $number - любая ЧИСЛОВАЯ ПЕРЕМЕННАЯ 
+/// @return {number} - вернёт значение без единиц измерения.
+/// @example
+///     $test = 100px;
+///     font-size: calc(strip-unit($test) * 1em); // font-size: calc(100 * 1em);
+@function strip-unit($number) {
+    @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
+        @return math.div($number, ($number * 0 + 1));
+    }
+
+    @return $number;
+}
+
+$imsRatio: math.div($max-desktop-width, 1920px);
+
+/// STATIC CALC IMS
+/// @param {unit} $value - px или var()
+/// @example
+///     max-width: staticCalcIms(100px); // calc(100px * $imsRatio * 1px)
+@function static-calc-ims($value) {
+    @return calc(#{$value} * #{$imsRatio} * 1px);
+}
+
+/// STATIC CALC APX
+/// @param {unit} $value - px или var()
+/// @param {px} $break - ширина макета
+/// @example
+///     max-width: staticCalcApx(100px, 1024px); // calc(100px / 1024 * 1rem)
+@function static-calc-apx($value, $break) {
+    @return calc((#{$value} / #{strip-unit($break)}) * 100vw);
+}
+
+/// STATIC CALC APX IMS
+/// @param {unit} $value - px или var()
+/// @param {px} $break - ширина макета
+/// @example
+///     max-width: staticCalcApxIms(100px, 1024px); // calc((100px * $imsRatio) / 1024 * 1rem)
+@function static-calc-apx-ims($value, $break) {
+    @return calc((#{$value} * #{$imsRatio}) / #{strip-unit($break)} * 100vw);
+}

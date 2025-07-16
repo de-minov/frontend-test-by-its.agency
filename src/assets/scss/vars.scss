@@ -1,0 +1,28 @@
+@use 'sass:list';
+
+// FONTS
+$Inter: "Inter", sans-serif;
+
+// SCREENS
+$max-desktop-width: 2560px;
+$max-desktop-height: 1440px;
+$max-phone-width: 768px;
+$max-phone-height: 1024px;
+
+$breakpoints: (
+    2560px
+    1920px
+    375px
+);
+
+// MEDIAS
+$media-2560: 'screen and (max-width: #{list.nth($breakpoints, 1)})';
+$media-1920: 'screen and (max-width: #{list.nth($breakpoints, 2)})';
+$media-768: 'screen and (max-width: 768px) and (max-height: 1023px) and (orientation: portrait)';
+
+$media-hover: '(hover: hover) and (pointer: fine) and (min-width: #{$max-phone-width + 1})';
+
+// COLORS
+$blackText: #1f2020;
+$accentColor:#7bb899;
+$lineColor: rgba(#000, .1);

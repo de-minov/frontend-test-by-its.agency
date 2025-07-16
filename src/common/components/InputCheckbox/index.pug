@@ -1,0 +1,11 @@
+mixin inputCheckbox()
+    label.input-checkbox(class=attributes.class id=attributes.id)
+        input(
+            type=attributes.type
+            name=attributes.name
+            checked=attributes.checked
+            value=attributes.value
+            disabled=attributes.disabled
+        )/
+        .input-checkbox__checkbox
+        .input-checkbox__label!=attributes.label

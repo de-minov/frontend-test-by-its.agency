@@ -1,0 +1,146 @@
+@use '../../../assets/scss/vars.scss' as *;
+@use '../../../assets/scss/mixins/media-mixins.scss' as *;
+@use '../../../assets/scss/mixins/media-breakpoints.scss' as *;
+
+.header {
+    display: block;
+    width: 100%;
+    height: var(--header-height);
+    background-color: #fff;
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 9990;
+
+    .max-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 172px;
+        height: 100%;
+
+        @include media-1920 {
+            gap: apxm(172px);
+        }
+
+        @include media-768 {
+            justify-content: space-between;
+            gap: apxm(40px);
+
+            &.isMobile {
+                display: flex !important;
+            }
+        }
+    }
+
+    &__burger {
+        display: none;
+        width: 24px;
+        height: 24px;
+
+        @include media-768 {
+            display: block;
+            width: apxm(24px);
+            height: apxm(24px);
+        }
+    }
+
+    &__logo {
+        display: block;
+        width: auto;
+        height: 26px;
+
+        @include media-1920 {
+            height: apxm(26px);
+        }
+
+        @include media-768 {
+            height: apxm(21px);
+        }
+
+        svg {
+            display: block;
+            width: auto;
+            height: 100%;
+        }
+    }
+
+    &__nav {
+        display: block;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+
+        ul {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 24px;
+            width: auto;
+
+            @include media-1920 {
+                gap: apxm(24px);
+            }
+        }
+    }
+
+    &__right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 116px;
+        width: auto;
+        margin-left: auto;
+
+        @include media-1920 {
+            gap: apxm(116px);
+        }
+    }
+
+    &__contacts {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 2px;
+        line-height: 1;
+
+        @include media-1920 {
+            gap: apxm(2px);
+        }
+
+        &-number {
+            font-size: 1.142em;
+            font-weight: 500;
+            letter-spacing: -.02em;
+        }
+
+        &-text {
+            font-weight: 400;
+            opacity: .3;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 24px;
+        width: auto;
+
+        @include media-1920 {
+            gap: apxm(24px);
+        }
+
+        svg {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+
+            @include media-1920 {
+                width: apxm(22px);
+                height: apxm(22px);
+            }
+        }
+    }
+}

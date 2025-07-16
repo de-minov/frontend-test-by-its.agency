@@ -1,0 +1,195 @@
+@use '../../../assets/scss/vars.scss' as *;
+@use '../../../assets/scss/mixins/media-mixins.scss' as *;
+@use '../../../assets/scss/mixins/media-breakpoints.scss' as *;
+@use '../../../../node_modules/swiper/swiper.scss';
+
+.banner {
+    --banner-navigation-offset: 54px;
+    --banner-navigation-size: 80px;
+    --banner-pagination-gap: 8px;
+    --banner-pagination-padding: 13px 24px;
+    --banner-pagination-offset: 39px;
+    --banner-pagination-dots-size: 6px;
+
+    display: block;
+    width: 100%;
+    height: 560px;
+    position: relative;
+
+    @include media-1920 {
+        --banner-navigation-offset: #{apxm(54px)};
+        --banner-navigation-size: #{apxm(80px)};
+        --banner-pagination-gap: #{apxm(8px)};
+        --banner-pagination-padding: #{apxm(13px)} #{apxm(24px)};
+        --banner-pagination-offset: #{apxm(39px)};
+        --banner-pagination-dots-size: #{apxm(6px)};
+
+        height: apxm(560px);
+    }
+
+    @include media-768 {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: apxm(17px);
+        padding: 0 var(--edge-indent);
+        height: auto;
+
+        &::before {
+            content: '';
+            display: block;
+            width: auto;
+            height: 2px;
+            background-color: $lineColor;
+        }
+    }
+
+    .swiper {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding-right: var(--scrolling-gutter);
+
+        &-background {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            z-index: -1;
+        }
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 24px;
+        width: auto;
+        text-align: center;
+        color: #fff;
+
+        @include media-1920 {
+            gap: apxm(24px);
+        }
+
+        &-title {
+            font-weight: 400;
+            font-size: 72px;
+            line-height: .88;
+            letter-spacing: -.02em;
+
+            @include media-1920 {
+                font-size: apxm(72px);
+            }
+        }
+
+        &-description {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.3;
+            letter-spacing: .02em;
+
+            @include media-1920 {
+                font-size: apxm(16px);
+            }
+        }
+    }
+
+    &__navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: var(--banner-navigation-size);
+        height: var(--banner-navigation-size);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #fff;
+        cursor: pointer;
+        z-index: 1;
+
+        &--disabled {
+            cursor: default;
+            opacity: .65;
+        }
+
+        &--prev {
+            left: var(--banner-navigation-offset);
+
+            svg {
+                transform: scaleX(-1);
+            }
+        }
+
+        &--next {
+            right: calc(var(--banner-navigation-offset) + var(--scrolling-gutter));
+        }
+
+        svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__pagination {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: var(--banner-pagination-gap);
+        width: auto;
+        border-radius: 99px;
+        background-color: rgba(#000, .4);
+        padding: var(--banner-pagination-padding);
+        position: absolute;
+        left: 50%;
+        bottom: var(--banner-pagination-offset);
+        transform: translateX(calc(-50% - var(--scrolling-gutter) * .5));
+        z-index: 1;
+
+        .swiper-pagination-bullet {
+            flex-shrink: 0;
+            display: block;
+            width: var(--banner-pagination-dots-size);
+            height: var(--banner-pagination-dots-size);
+            border-radius: 50%;
+            background-color: rgba(#fff, .2);
+            transition: background-color .2s ease;
+            cursor: pointer;
+
+            &-active {
+                background-color: #fff;
+                cursor: default;
+            }
+        }
+    }
+
+    &__breadcrumbs {
+        color: #fff;
+        position: absolute;
+        left: var(--edge-indent);
+        top: 32px;
+        z-index: 2;
+
+        @include media-1920 {
+            top: apxm(32px);
+        }
+
+        @include media-768 {
+            color: $blackText;
+            position: static;
+        }
+    }
+}

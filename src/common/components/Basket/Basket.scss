@@ -1,0 +1,236 @@
+@use '../../../assets/scss/vars.scss' as *;
+@use '../../../assets/scss/mixins/media-mixins.scss' as *;
+@use '../../../assets/scss/mixins/media-breakpoints.scss' as *;
+@use '../../../assets/scss/mixins/custom-scroll.scss' as *;
+
+.basket {
+    --basket-padding: 40px;
+    --basket-gap: 80px;
+    --basket-close-size: 48px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    gap: var(--basket-gap);
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: var(--basket-padding);
+    padding-right: calc(var(--basket-padding) + var(--scrolling-gutter));
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 9999;
+    transform: translateX(100%);
+    transition: transform .4s ease;
+
+    &--opened {
+        transform: translateX(0);
+    }
+
+    @include media-1920 {
+        --basket-padding: #{apxm(40px)};
+        --basket-gap: #{apxm(80px)};
+        --basket-close-size: #{apxm(48px)};
+
+        max-width: apxm(600px);
+    }
+
+    @include media-768 {
+        --basket-padding: #{apxm(15px)};
+        --basket-gap: #{apxm(30px)};
+        --basket-close-size: #{apxm(48px)};
+
+        padding: var(--basket-padding) var(--edge-indent);
+        padding-right: calc(var(--edge-indent) + var(--scrolling-gutter));
+
+        max-width: 100%;
+    }
+
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-title {
+            font-weight: 500;
+            font-size: 30px;
+            line-height: .88;
+            letter-spacing: -.04em;
+
+            @include media-1920 {
+                font-size: apxm(30px);
+            }
+
+            @include media-768 {
+                font-size: apxm(30px);
+            }
+        }
+
+        &-close {
+            flex-shrink: 0;
+            display: block;
+            width: var(--basket-close-size);
+            height: var(--basket-close-size);
+            border-radius: 50%;
+            border: 1px solid $lineColor;
+            cursor: pointer;
+
+            svg {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    &__content {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: var(--basket-padding);
+    }
+
+    &__price {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 6px;
+        line-height: 1;
+
+        @include media-1920 {
+            gap: apxm(6px);
+        }
+
+        @include media-768 {
+            gap: apxm(6px);
+        }
+
+        &-title {
+            font-weight: 400;
+            font-size: 16px;
+            
+            @include media-1920 {
+                font-size: apxm(16px);
+            }
+
+            @include media-768 {
+                font-size: apxm(16px);
+            }
+        }
+
+        &-value {
+            font-weight: 500;
+            font-size: 30px;
+            letter-spacing: -.02em;
+
+            @include media-1920 {
+                font-size: apxm(30px);
+            }
+
+            @include media-768 {
+                font-size: apxm(30px);
+            }
+        }
+    }
+
+    &-product {
+        --basket-product-gap: 12px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        height: 100%;
+        gap: var(--basket-product-gap);
+
+        @include media-1920 {
+            --basket-product-gap: #{apxm(12px)};
+        }
+
+        @include media-768 {
+            --basket-product-gap: #{apxm(12px)};
+        }
+
+        &__head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--basket-gap);
+            padding-bottom: var(--basket-product-gap);
+            border-bottom: 1px solid $lineColor;
+            line-height: 1.12;
+
+            &-clear {
+                font-weight: 300;
+                text-transform: uppercase;
+                color: rgba($blackText, .4);
+                user-select: none;
+                cursor: pointer;
+            }
+        }
+
+        &__list {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            gap: var(--basket-product-gap);
+            height: 100%;
+            overflow: hidden auto;
+
+            @include scroll-custom($blackText, #f2f2f2);
+
+            > div:not(:last-child) {
+                padding-bottom: var(--basket-product-gap);
+                border-bottom: 1px solid $lineColor;
+            }
+        }
+    }
+
+    &-icon {
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: $accentColor;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: .06em;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+
+        @include media-1920 {
+            min-width: apxm(24px);
+            height: apxm(24px);
+            font-size: apxm(12px);
+        }
+
+        @include media-768 {
+            width: apxm(24px);
+            height: apxm(24px);
+            font-size: apxm(12px);
+        }
+
+        &::before {
+            content: attr(data-basket-value);
+            display: inline-block;
+        }
+
+        &[data-basket-value="0"] {
+            background-color: #f2f2f2;
+        }
+    }
+}

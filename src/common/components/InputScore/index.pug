@@ -1,0 +1,23 @@
+mixin inputScore()
+    .input-score(
+        class=[attributes.class, {
+            ['input-score--isStart']: attributes.isStart,
+            ['input-score--hidden-controls']: attributes.isStart && attributes.value == attributes.min
+        }]
+        id=attributes.id
+    )
+        input.input-score__input-hidden(
+            type="number"
+            value=attributes.value || 0
+            name=attributes.name
+            disabled=attributes.disabled
+            data-is-clear=attributes.isClear
+            data-is-start=attributes.isStart
+            data-step=attributes.step || 1
+            data-min=attributes.min
+            data-max=attributes.max
+        )
+
+        .input-score__button.input-score__button--minus: +icon('icon:minus', 16, 16)
+        .input-score__value!=attributes.value || 0
+        .input-score__button.input-score__button--plus: +icon('icon:plus', 16, 16)

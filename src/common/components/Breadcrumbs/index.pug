@@ -1,0 +1,14 @@
+//- PATHS = {
+//-   href: string;
+//-   text: string;
+//- }
+
+mixin breadcrumbs(paths, separator = '•')
+    .breadcrumbs(class=attributes.class id=attributes.id)
+        each item, index in paths
+            if index < paths.length - 1
+                a(href=item.href).breadcrumbs__item!=item.text
+                if separator && separator !== ''
+                    span.breadcrumbs__separator!=separator
+            else
+                span.breadcrumbs__item!=item.text

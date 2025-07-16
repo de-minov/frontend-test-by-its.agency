@@ -1,0 +1,26 @@
+section.products(data-status="loading"): .max-wrapper
+    include ../ProductCard/index
+    .products__title.isMobile Краски
+
+    aside.products__aside
+        .products__filter
+            +inputCheckbox(type="checkbox" label="Новинки" name="product_filter[]" value="isNew" checked)
+            +inputCheckbox(type="checkbox" label="Есть в наличии" name="product_filter[]" value="inStock")
+            +inputCheckbox(type="checkbox" label="Контрактные" name="product_filter[]" value="isContract")
+            +inputCheckbox(type="checkbox" label="Эксклюзивные" name="product_filter[]" value="isExclusive")
+            +inputCheckbox(type="checkbox" label="Распродажа" name="product_filter[]" value="isSale")
+    .products__content
+        .products__head
+            .products__head-values.isDesktop
+            .products__head-filter(role="button" area-label="Открыть фильтры").isMobile Фильтры
+            .products__head-sorting
+                +inputSelect(
+                    options=[
+                        { label: 'Сначала дорогие', value: 'price_desc' },
+                        { label: 'Сначала недорогие', value: 'price_asc' },
+                        { label: 'Сначала популярные', value: 'popularity_desc' },
+                        { label: 'Сначала новые', value: 'date_desc' },
+                    ]
+                    name="product_sort"
+                )
+        .products__grid

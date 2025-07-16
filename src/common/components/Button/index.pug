@@ -1,0 +1,10 @@
+mixin button()
+    .button(
+        role="button"
+        class={
+            [attributes.class]: attributes.class,
+            'button--disabled': attributes.disabled
+        }
+        id=attributes.id
+        area-label=attributes.label
+    )!=attributes.label

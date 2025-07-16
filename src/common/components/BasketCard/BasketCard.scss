@@ -1,0 +1,183 @@
+@use '../../../assets/scss/vars.scss' as *;
+@use '../../../assets/scss/mixins/media-mixins.scss' as *;
+@use '../../../assets/scss/mixins/media-breakpoints.scss' as *;
+
+.basket-card {
+    --basket-card-image-size: 96px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+
+    @include media-1920 {
+        --basket-card-image-size: #{apxm(96px)};
+    }
+
+    @include media-768 {
+        flex-wrap: wrap;
+        gap: apxm(5px);
+        --basket-card-image-size: #{apxm(96px)};
+    }
+
+    &__image {
+        flex-shrink: 0;
+        display: block;
+        width: var(--basket-card-image-size);
+        height: var(--basket-card-image-size);
+        margin-right: 8px;
+
+        @include media-1920 {
+            margin-right: apxm(8px);
+        }
+
+        @include media-768 {
+            margin-right: 0;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 16px;
+        font-size: 16px;
+
+        @include media-1920 {
+            gap: apxm(16px);
+            font-size: apxm(16px);
+        }
+
+        @include media-768 {
+            gap: apxm(16px);
+            max-width: calc(100% - apxm(8px) - var(--basket-card-image-size));
+            font-size: apxm(16px);
+        }
+
+        &-title {
+            font-weight: 300;
+            line-height: 1.12;
+            letter-spacing: .02em;
+        }
+
+        &-price {
+            font-weight: 600;
+            line-height: 1;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 37px;
+        margin-left: auto;
+
+        @include media-1920 {
+            gap: apxm(37px);
+        }
+
+        @include media-768 {
+            gap: apxm(10px);
+            width: 100%;
+            margin-left: 0;
+
+            .input-score {
+                margin-right: auto;
+            }
+        }
+
+        &-button {
+            display: block;
+            width: 24px;
+            height: 24px;
+            user-select: none;
+            cursor: pointer;
+            transition: color .2s ease;
+            
+            @include media-1920 {
+                width: apxm(24px);
+                height: apxm(24px);
+            }
+
+            @include media-768 {
+                width: apxm(24px);
+                height: apxm(24px);
+            }
+
+            @include media-hover {
+                color: rgba($blackText, .65);
+            }
+
+            svg {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            &[data-action="remove"] {
+                color: rgba($blackText, .2);
+
+                @include media-hover {
+                    color: $blackText;
+                }
+            }
+
+            &[data-action="replace"] {
+                display: none;
+            }
+        }
+    }
+
+    // SALE
+    &[data-status~="isSale"][data-status~="inStock"] & {
+        &__image {
+            overflow: hidden;
+            position: relative;
+
+            &::before {
+                content: 'SALE';
+                background-color: #ce2324;
+                color: #fff;
+                font-size: .65em;
+                position: absolute;
+                padding: .2em 1em;
+                left: 0;
+                top: 0;
+                transform: rotate(-45deg) translateX(-25%);
+                box-shadow: 
+                    -2em 0 0 0 #ce2324,
+                    2em 0 0 0 #ce2324;
+            }
+        }
+    }
+
+    // NOT STOCK
+    &:not([data-status~="inStock"]) &__image,
+    &:not([data-status~="inStock"]) &__info {
+        opacity: .2;
+    }
+
+    &:not([data-status~="inStock"]) &__actions .input-score {
+        opacity: .2;
+        pointer-events: none;
+    }
+
+    &:not([data-status~="inStock"]) &__actions-button {
+        &[data-action="remove"] {
+            display: none;
+        }
+
+        &[data-action="replace"] {
+            display: block;
+        }
+    }
+}

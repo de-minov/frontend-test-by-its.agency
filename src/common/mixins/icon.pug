@@ -1,0 +1,7 @@
+mixin icon(id, width, height, viewBox = null)
+    svg(
+        width=width
+        height=height
+        viewBox=viewBox || `0 0 ${width} ${height}`
+    )&attributes(attributes)
+        use(href=`#${id}`)/

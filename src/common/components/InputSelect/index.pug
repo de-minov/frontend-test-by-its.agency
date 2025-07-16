@@ -1,0 +1,29 @@
+//- OPTIONS = {
+//-   label: string;
+//-   value?: string;
+//-   checked?: boolean;
+//- }
+
+mixin inputSelect()
+    label.input-select(class=attributes.class id=attributes.id)
+        - var firstOption = attributes.options[0];
+        input.input-select__input-hidden(
+            type="hidden"
+            value=(firstOption.value || firstOption.label || '')
+            name=attributes.name
+            disabled=attributes.disabled
+        )/
+        .input-select__label
+            span!=firstOption.label
+            +icon('icon:drop', 10, 10)
+        .input-select__drop
+            each item, index in attributes.options
+                .input-select__drop-item(
+                    class={
+                        'input-select__drop-item--selected': item.checked || index === 0
+                    }
+                    data-value=item.value || item.label
+                )
+                    !=item.label
+
+

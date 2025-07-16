@@ -1,0 +1,33 @@
+@use 'sass:string';
+@use 'sass:math';
+@use 'sass:list';
+@use '../vars' as *;
+@use 'utils' as *;
+
+$dbreak: list.nth($breakpoints, 1) !default;
+
+@function apxm($px) {
+    @return r2f(math.div($px, $dbreak) * 100vw);
+}
+
+// MEDIA BREAKPOINTS
+@mixin media-2560 {
+    @media #{$media-2560} {
+        $dbreak: list.nth($breakpoints, 1) !global;
+        @content;
+    }
+}
+
+@mixin media-1920 {
+    @media #{$media-1920} {
+        $dbreak: list.nth($breakpoints, 2) !global;
+        @content;
+    }
+}
+
+@mixin media-768 {
+    @media #{$media-768} {
+        $dbreak: list.nth($breakpoints, 3) !global;
+        @content;
+    }
+}

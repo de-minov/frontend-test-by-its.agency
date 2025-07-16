@@ -1,0 +1,23 @@
+@use '../vars' as *;
+
+// MEDIA DEVICES
+@mixin media-desktop {
+    @media #{$media-desktop} {
+        @content;
+    }
+}
+
+@mixin media-phone {
+    @media #{$media-phone} {
+        @content;
+    }
+}
+
+// HOVER
+@mixin media-hover {
+    @media #{$media-hover} {
+        &:hover {
+            @content;
+        }
+    }
+}

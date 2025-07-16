@@ -1,0 +1,24 @@
+include ../mixins/icon
+
+block VARS
+    - var PAGE_TITLE = 'Frontend test by IT\'s Agency'
+
+doctype html
+html(lang=lang prefix="og: https://ogp.me/ns#")
+    head
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')/
+        meta(http-equiv='Content-Type' content='text/html;charset=UTF-8')/
+        meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')/
+
+        title=PAGE_TITLE
+
+        link(href="/css/global.min.css" type="text/css" rel="stylesheet")/
+
+        block STYLES
+
+    body
+        include ../components/MasterSVG/index.pug
+        .body
+            block BODY
+        script(src="/js/main.min.js")
+        block SCRIPTS

@@ -1,0 +1,38 @@
+-
+    var nav = [
+        { text: 'Продукты' },
+        { text: 'Цвета' },
+        { text: 'Вдохновение' },
+        { text: 'Советы' },
+        { text: 'Найти магазин' },
+    ]
+    var tel = '+7 (495) 221-77-69';
+
+header.header
+    .max-wrapper.isDesktop
+        a.header__logo(href="/"): +icon('logo:main', 131, 26)
+        
+        nav.header__nav(role="navigation" area-label="Навигация"): ul
+            each item in nav
+                li: a(href='#')!=item.text
+        
+        .header__right
+            .header__contacts
+                a.header__contacts-number(href=`tel:${tel.replace(/[\s\-()]/g, '')}`)!=tel
+                span.header__contacts-text Заказать звонок
+
+            ul.header__buttons.basket-action--opened(area-label="Навигация")
+                li: +icon('icon:search', 20, 20)
+                li: +icon('icon:user', 22, 22)
+                li: +icon('icon:favorite', 22, 22)
+                li: .basket-icon(role="button" area-label="Открыть корзину" data-basket-value="0")
+
+    .max-wrapper.isMobile
+        +icon('icon:burger', 24, 24).header__burger
+
+        a.header__logo(href="/"): +icon('logo:main', 131, 26)
+
+        .basket-icon.basket-action--opened(role="button" area-label="Открыть корзину" data-basket-value="0")
+
+include ../InputScore/index
+include ../Basket/index

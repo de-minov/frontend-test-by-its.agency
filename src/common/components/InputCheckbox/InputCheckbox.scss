@@ -1,0 +1,104 @@
+@use '../../../assets/scss/vars.scss' as *;
+@use '../../../assets/scss/mixins/media-mixins.scss' as *;
+@use '../../../assets/scss/mixins/media-breakpoints.scss' as *;
+
+.input-checkbox {
+    --input-checkbox-dot-offset: 7px;
+    --input-checkbox-dot-size: 8px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    width: auto;
+    cursor: pointer;
+    user-select: none;
+
+    @include media-1920 {
+        --input-checkbox-dot-offset: #{apxm(7px)};
+        --input-checkbox-dot-size: #{apxm(8px)};
+
+        gap: apxm(12px);
+    }
+
+    @include media-768 {
+        --input-checkbox-dot-offset: #{apxm(7px)};
+        --input-checkbox-dot-size: #{apxm(8px)};
+
+        gap: apxm(12px);
+    }
+
+    input {
+        display: none;
+    }
+
+    &__checkbox {
+        flex-shrink: 0;
+        display: block;
+        width: 36px;
+        height: 22px;
+        border-radius: 99px;
+        background-color: #F2F2F2;
+        position: relative;
+        transition: background-color .2s ease;
+
+        @include media-1920 {
+            width: apxm(36px);
+            height: apxm(22px);
+        }
+
+        @include media-768 {
+            width: apxm(36px);
+            height: apxm(22px);
+        }
+
+        &::before {
+            content: '';
+            display: block;
+            width: var(--input-checkbox-dot-size);
+            height: var(--input-checkbox-dot-size);
+            background-color: $blackText;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: var(--input-checkbox-dot-offset);
+            transform: translateY(-50%);
+            transition: {
+                property: left, transform;
+                duration: .2s;
+                timing-function: ease;
+            };
+        }
+    }
+
+    &__label {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 1;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+
+        @include media-1920 {
+            font-size: apxm(12px);
+        }
+
+        @include media-768 {
+            font-size: apxm(12px);
+        }
+    }
+
+    &:has(input:checked) & {
+        &__checkbox {
+            background-color: $accentColor;
+
+            &::before {
+                left: calc(100% - var(--input-checkbox-dot-offset));
+                transform: translateY(-50%) translateX(-100%);
+            }
+        }
+    }
+
+    &:has(input:disabled) & {
+        opacity: .75;
+        cursor: default;
+    }
+}
