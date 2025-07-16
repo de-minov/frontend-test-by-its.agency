@@ -67,7 +67,7 @@ export default class ProductsStorage {
         this._updateStatus('loading');
 
         try {
-            const response = await axios.get('/files/api/products.json');
+            const response = await axios.get('./files/api/products.json');
             const data = response.data;
 
             if (isArray(data) && !isEmpty(data)) {

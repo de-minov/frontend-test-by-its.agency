@@ -21,7 +21,7 @@ export default class BasketStorage {
     // Метод для получения всех товаров
     async getProducts() {
         try {
-            const response = await axios.get('/files/api/products.json'); // Пример запроса
+            const response = await axios.get('./files/api/products.json'); // Пример запроса
             const data = response.data;
 
             if (isArray(data) && !isEmpty(data)) {

@@ -47,7 +47,7 @@ export default function BasketContent() {
             product.isSale ? 'isSale' : '',
         ]), ' ');
 
-        img.src = product.image || '/files/images/no-photo.jpg';
+        img.src = product.image || './files/images/no-photo.jpg';
         img.alt = product.title || 'product';
         title.textContent = product.name;
         price.textContent = `${product.price} ₽`;

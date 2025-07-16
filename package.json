@@ -10,7 +10,7 @@
     "dev": "gulp",
     "build": "gulp build",
     "predeploy": "gulp build",
-    "deploy": "gh-pages -d htdocs"
+    "deploy": "gh-pages -d htdocs --repo=git@github.com-de-minov:de-minov/frontend-test-by-its.agency.git"
   },
   "type": "module",
   "devDependencies": {
